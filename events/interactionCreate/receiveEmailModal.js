@@ -45,10 +45,10 @@ module.exports = async (interaction) => {
 
 		const { data: subscrptionData } = await fetchSubscription(data[0].id);
 
-		// if (subscrptionData.length === 0 || subscrptionData[0]?.status !== "active")
-		// 	throw new Error(
-		// 		"Your subscription is not active, please try again after activating it",
-		// 	);
+		if (subscrptionData.length === 0 || subscrptionData[0]?.status !== "active")
+			throw new Error(
+				"Your subscription is not active, please try again after activating it",
+			);
 
 		console.log(subscrptionData);
 		const package = config[subscrptionData[0].plan?.product];
