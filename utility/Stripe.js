@@ -15,4 +15,5 @@ const fetchCustomer = async (email) =>
 const fetchSubscription = async (customer) =>
 	await stripe.subscriptions.list({ customer });
 
+// fetchSubscription("cus_Q34NHZaZ3ijmTt").then((res) => console.log(res.data[0]));
 module.exports = { fetchCustomer, fetchSubscription };
