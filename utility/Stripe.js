@@ -6,14 +6,16 @@ const fetchCustomer = async (email) =>
 		email,
 	});
 
-// stripe.products
-// 	.list({
-// 		// limit: 3,
-// 	})
-// 	.then((res) => console.log(res));
+stripe.products
+	.list({
+		// limit: 3,
+	})
+	.then((res) => console.log(res));
 
 const fetchSubscription = async (customer) =>
 	await stripe.subscriptions.list({ customer });
-
-// fetchSubscription("cus_Q34NHZaZ3ijmTt").then((res) => console.log(res.data[0]));
+// fetchCustomer("ravenbluleblanc@gmail.com").then((res) =>
+// 	console.log(res.data[0]),
+// );
+// fetchSubscription("cus_Q4QTNRw8oGMQgl").then((res) => console.log(res.data[0]));
 module.exports = { fetchCustomer, fetchSubscription };

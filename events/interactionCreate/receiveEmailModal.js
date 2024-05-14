@@ -45,7 +45,11 @@ module.exports = async (interaction) => {
 
 		const { data: subscrptionData } = await fetchSubscription(data[0].id);
 
-		if (subscrptionData.length === 0 || subscrptionData[0]?.status !== "active")
+		if (
+			subscrptionData.length === 0 ||
+			subscrptionData[0]?.status !== "active" ||
+			subscrptionData[0]?.status !== "trialing"
+		)
 			throw new Error(
 				"Your subscription is not active, please try again after activating it",
 			);
