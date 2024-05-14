@@ -84,7 +84,9 @@ async function checkForSubscriptions() {
 			}
 
 			const { data: subscrptionData } = response;
-			const isActive = subscrptionData[0]?.status === "active";
+			const isActive =
+				subscrptionData[0]?.status === "active" ||
+				subscrptionData[0]?.status === "trialing";
 
 			if (subscrptionData.length === 0 || !isActive) {
 				if (!member.roles.cache.has(roleId)) continue;
