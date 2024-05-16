@@ -47,8 +47,8 @@ module.exports = async (interaction) => {
 
 		if (
 			subscrptionData.length === 0 ||
-			subscrptionData[0]?.status !== "active" ||
-			subscrptionData[0]?.status !== "trialing"
+			(subscrptionData[0]?.status !== "active" &&
+				subscrptionData[0]?.status !== "trialing")
 		)
 			throw new Error(
 				"Your subscription is not active, please try again after activating it",
