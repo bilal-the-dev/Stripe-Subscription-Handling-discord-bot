@@ -65,6 +65,8 @@ module.exports = async (interaction) => {
 		await member.roles.add(roleId);
 		await member.roles.remove(process.env.FREE_ROLE_ID);
 
+		// ("s");
+
 		const doc = await Email.findOne({ userId });
 
 		if (!doc && !isSession)
