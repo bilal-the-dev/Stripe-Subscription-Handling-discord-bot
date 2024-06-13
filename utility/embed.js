@@ -1,5 +1,5 @@
 const { EmbedBuilder, channelMention } = require("discord.js");
-const { TICKET_CHANNEL_ID, UPGRADE_CHANNEL_ID } = process.env;
+const { TICKET_CHANNEL_ID } = process.env;
 const generateGeneralEmbed = function ({
 	title,
 	url,
@@ -21,10 +21,8 @@ const generateGeneralEmbed = function ({
 
 const generateDMEmbed = function (guild) {
 	return generateGeneralEmbed({
-		title: ":bangbang: Subscriber Verification :bangbang:",
-		description: `Welcome to my nest!!! :D Thank you for being here <3 If you've bought a tier, click on the button below and input the email you used on Stripe to get your role.\n\nIf you haven't checked out our coaching program, learn more by clicking [here](https://www.dobbysnest.com/) or going to our ${channelMention(
-			UPGRADE_CHANNEL_ID,
-		)}`,
+		title: ":bangbang: Member Verification :bangbang:",
+		description: `Welcome to my Nest!!! :D Can't thank you enough for being here <3 To get your role & access to the server, input the email you used in Stripe below. You can manage your subscription [here](https://portal.dobbysnest.com/p/login/14kbK556m8QbaGs144) See you soon - Dobby`,
 		thumbnail: guild.iconURL(),
 		footer: {
 			text: guild.name,
@@ -36,7 +34,7 @@ const generateDMEmbed = function (guild) {
 const generateSubsRegisterEmbed = function (member) {
 	return generateGeneralEmbed({
 		title: ":bangbang: Welcome :bangbang:",
-		description: ` Congratz!! Your climbing journey officially begins now  <33 Your support doesn't go unnoticed and we're excited to help you learn more and keep getting better :) - Dobby\n\nYou can manage your subscription [here](https://portal.dobbysnest.com/p/login/14kbK556m8QbaGs144)`,
+		description: `Your climbing journey officially begins now <33 Your support doesn't go unnoticed and we're excited to help you learn more, grow from each other, and have some fun - Dobby\n\nYou can manage your subscription [here](https://portal.dobbysnest.com/p/login/14kbK556m8QbaGs144)`,
 		thumbnail: member.displayAvatarURL(),
 	});
 };

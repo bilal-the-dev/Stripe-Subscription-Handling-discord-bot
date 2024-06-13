@@ -63,7 +63,6 @@ module.exports = async (interaction) => {
 		const isSession = name === "1:1 Challenger Coaching";
 
 		await member.roles.add(roleId);
-		await member.roles.remove(process.env.FREE_ROLE_ID);
 
 		// ("s");
 

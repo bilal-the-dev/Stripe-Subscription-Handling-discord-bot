@@ -11,7 +11,7 @@ const Email = require("./models/Email");
 const { fetchSubscription } = require("./utility/Stripe");
 const { sendNotifyEmbed, sendUserEmbed } = require("./utility/embed");
 
-const { TOKEN, MONGO_URI, GUILD_ID, FREE_ROLE_ID } = process.env;
+const { TOKEN, MONGO_URI, GUILD_ID } = process.env;
 
 const client = new Client({
 	intents: [
@@ -77,7 +77,6 @@ async function checkForSubscriptions() {
 			if (response?.raw?.statusCode === 400) {
 				if (!member.roles.cache.has(roleId)) continue;
 				await member.roles.remove(roleId);
-				await member.roles.add(FREE_ROLE_ID);
 				await sendNotifyEmbed({ guild, member, roleId });
 				await sendUserEmbed(member, "cancel");
 				continue;
@@ -91,7 +90,6 @@ async function checkForSubscriptions() {
 			if (subscrptionData.length === 0 || !isActive) {
 				if (!member.roles.cache.has(roleId)) continue;
 				await member.roles.remove(roleId);
-				await member.roles.add(FREE_ROLE_ID);
 
 				await sendNotifyEmbed({ guild, member, roleId });
 				await sendUserEmbed(member, "cancel", subscrptionData[0]?.status);
