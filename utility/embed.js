@@ -88,7 +88,7 @@ const sendUserEmbed = async (member, type, status) => {
 		.send({
 			content:
 				type !== "initialActive"
-					? `# Subscription Status : ${status ?? "No more a customer"}`
+					? `# Subscription Status : ${status ?? "Deactivated"}`
 					: "",
 			embeds: [embed],
 		})
