@@ -64,6 +64,8 @@ module.exports = async (interaction) => {
 
 		await member.roles.add(roleId);
 
+		if(name === 'hawk (same as pre hatchling role)') await member.roles.add(config['prod_Q2YlXt76dWP25K']?.roleId)
+
 		// ("s");
 
 		const doc = await Email.findOne({ userId });
