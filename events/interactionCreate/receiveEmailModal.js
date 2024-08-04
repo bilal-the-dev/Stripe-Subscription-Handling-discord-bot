@@ -64,7 +64,7 @@ module.exports = async (interaction) => {
 
 		await member.roles.add(roleId);
 
-		if(name === 'hawk (same as pre hatchling role)') await member.roles.add(config['prod_Q2YlXt76dWP25K']?.roleId)
+		if(subscrptionData[0].plan?.product === 'prod_QXSle6GS1ZMncZ') await member.roles.add(config['prod_Q2YlXt76dWP25K']?.roleId)
 
 		// ("s");
 
