@@ -73,7 +73,6 @@ async function checkForSubscriptions() {
 
 			const response = await fetchSubscription(customerId).catch((e) => e);
 
-			console.log("hello");
 			if (response?.raw?.statusCode === 400) {
 				if (!member.roles.cache.has(roleId)) continue;
 				await member.roles.remove(roleId);
