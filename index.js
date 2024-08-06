@@ -10,6 +10,7 @@ dotenv.config({ path: ".env" });
 const Email = require("./models/Email");
 const { fetchSubscription } = require("./utility/Stripe");
 const { sendNotifyEmbed, sendUserEmbed } = require("./utility/embed");
+const config= require('./config.json)
 
 const { TOKEN, MONGO_URI, GUILD_ID } = process.env;
 
@@ -75,6 +76,7 @@ async function checkForSubscriptions() {
 
 			if (response?.raw?.statusCode === 400) {
 				if (!member.roles.cache.has(roleId)) continue;
+				if(roleId === config["prod_QXSle6GS1ZMncZ"]?.roleId) await member.roles.remove(config["prod_QXSle6GS1ZMncZ"]?.roleId2)
 				await member.roles.remove(roleId);
 				await sendNotifyEmbed({ guild, member, roleId });
 				await sendUserEmbed(member, "cancel");
@@ -88,6 +90,8 @@ async function checkForSubscriptions() {
 
 			if (subscrptionData.length === 0 || !isActive) {
 				if (!member.roles.cache.has(roleId)) continue;
+				if(roleId === config["prod_QXSle6GS1ZMncZ"]?.roleId) await member.roles.remove(config["prod_QXSle6GS1ZMncZ"]?.roleId2)
+
 				await member.roles.remove(roleId);
 
 				await sendNotifyEmbed({ guild, member, roleId });
