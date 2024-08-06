@@ -59,12 +59,12 @@ module.exports = async (interaction) => {
 
 		if (!package) throw new Error("Something went wrong");
 
-		const { roleId, name } = package;
+		const { roleId, name, roleId2 } = package;
 		const isSession = name === "1:1 Challenger Coaching";
 
 		await member.roles.add(roleId);
 
-		if(subscrptionData[0].plan?.product === 'prod_QXSle6GS1ZMncZ') await member.roles.add(config['prod_Q2YlXt76dWP25K']?.roleId)
+		if(subscrptionData[0].plan?.product === 'prod_QXSle6GS1ZMncZ') await member.roles.add(roleId2)
 
 		// ("s");
 
