@@ -10,7 +10,7 @@ dotenv.config({ path: ".env" });
 const Email = require("./models/Email");
 const { fetchSubscription } = require("./utility/Stripe");
 const { sendNotifyEmbed, sendUserEmbed } = require("./utility/embed");
-const config= require('./config.json)
+const config= require('./config.json')
 
 const { TOKEN, MONGO_URI, GUILD_ID } = process.env;
 
