@@ -1,4 +1,28 @@
 {
+	"prod_R1iHQPS9b3r2Ab": {
+		"roleId": "1295152534758883460",
+		"name": "Challanger tier x3"
+	},
+	"prod_R1iEXQLECfyBBm": {
+		"roleId": "1219707128495870083",
+		"name": "Diamond tier x3"
+	},
+	"prod_R1i9VhooK7gvse": {
+		"roleId": "1231905575952973865",
+		"name": "Iron Tier x3"
+	},
+	"prod_R1i3zsNziLBQcv": {
+		"roleId": "1295152534758883460",
+		"name": "Challanger tier"
+	},
+	"prod_R1hzoeXAUB0vAE": {
+		"roleId": "1219707128495870083",
+		"name": "Diamond tier"
+	},
+	"prod_R1hujZj5qUQTMa": {
+		"roleId": "1231905575952973865",
+		"name": "Iron tier"
+	},
 	"prod_Pymd8dBfC0WUXW": {
 		"roleId": "1231905575952973865",
 		"name": "Hatchling"
@@ -19,5 +43,10 @@
 	"prod_Q2YlXt76dWP25K": {
 		"roleId": "1235540497930522746",
 		"name": "1:1 Challenger Coaching"
+	},
+	"prod_R1iP8VQFd1aVig": {
+		"roleId": "1235540497930522746",
+		"name": "1:1 Challenger Coaching",
+		"altText":"new Cheap Challenger Coaching"
 	}
 }
