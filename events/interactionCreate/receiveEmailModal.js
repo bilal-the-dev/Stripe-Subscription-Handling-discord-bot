@@ -77,6 +77,8 @@ module.exports = async (interaction) => {
 		const { roleId, name, roleId2 } = package;
 		const isSession = name === "1:1 Challenger Coaching";
 
+		const r = guild.roles.cache.get(roleId)
+		console.log(r)
 		await member.roles.add(roleId);
 
 		if(subscrptionData[0].plan?.product === 'prod_QXSle6GS1ZMncZ') await member.roles.add(roleId2)
