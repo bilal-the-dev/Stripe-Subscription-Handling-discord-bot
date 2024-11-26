@@ -22,7 +22,7 @@ const generateGeneralEmbed = function ({
 const generateDMEmbed = function (guild) {
 	return generateGeneralEmbed({
 		title: ":bangbang: Member Verification :bangbang:",
-		description: `Welcome to my Nest!!! :D Can't thank you enough for being here <3 To get your role & access to the server, input the email you used in Stripe below. You can manage your subscription [here](https://portal.dobbysnest.com/p/login/14kbK556m8QbaGs144) See you soon - Dobby`,
+		description: `Welcome to my domain >:) Type in the email you used in Stripe to gain full access to the server. If you run into a problem, create a ticket below or message <@473520735357370378>`,
 		thumbnail: guild.iconURL(),
 		footer: {
 			text: guild.name,
