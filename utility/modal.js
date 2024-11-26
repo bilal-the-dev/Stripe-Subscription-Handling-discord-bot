@@ -13,7 +13,7 @@ const generateEmailSubmitModal = function () {
 	const email = new TextInputBuilder()
 		.setCustomId("email")
 		.setLabel("Stripe Email")
-		.setPlaceholder("Enter your stripe email")
+		.setPlaceholder("Enter your stripe email (Case-Sensitive)")
 
 		.setStyle(TextInputStyle.Short);
 
