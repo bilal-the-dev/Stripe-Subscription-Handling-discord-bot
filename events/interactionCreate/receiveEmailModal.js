@@ -1,3 +1,5 @@
+const {PermissionFlagsBits}= require('discord.js')
+
 const Email = require("../../models/Email");
 const { fetchSubscription, fetchCustomer } = require("../../utility/Stripe");
 const { replyOrEditInteraction } = require("../../utility/interaction");
@@ -28,11 +30,24 @@ module.exports = async (interaction) => {
 		const email = fields.getTextInputValue("email");
 		const guild = client.guilds.cache.get(GUILD_ID);
 
-		const member = await guild.members
-			.fetch(userId)
-			.catch((e) => console.log(e));
+		console.log(guild.members.me.permissions.toArray())
+		console.log(guild.members.me.permissions.has(
+			PermissionFlagsBits.ManageRoles
+		))
+		console.log(guild.members.me.roles.highest.position)
+		console.log(guild.members.me.roles.highest)
 
+		
+		const member = await guild.members
+		.fetch(userId)
+		.catch((e) => console.log(e));
+		
+		console.log(member.permissions.toArray())
+		console.log(member.roles.highest)
+		console.log(member.roles.highest.position)
 		if (!member) throw new Error(`You are no longer a member of ${guild.name}`);
+
+
 
 		const isEmailRegistered = await Email.findOne({ email });
 
