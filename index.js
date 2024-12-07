@@ -10,7 +10,7 @@ dotenv.config({ path: ".env" });
 const Email = require("./models/Email");
 const { fetchSubscription } = require("./utility/Stripe");
 const { sendNotifyEmbed, sendUserEmbed } = require("./utility/embed");
-const config= require('./config.json')
+const config = require("./config.json");
 
 const { TOKEN, MONGO_URI, GUILD_ID } = process.env;
 
@@ -66,7 +66,16 @@ async function checkForSubscriptions() {
 
 	for (const doc of docs) {
 		try {
-			const { customerId, roleId, userId } = doc;
+			const { customerId, planId, roleId: roleIdForOldDocuments, userId } = doc;
+
+			const configForPlan = config[planId];
+			const roleId = configForPlan?.roleId ?? roleIdForOldDocuments;
+
+			if (!roleId)
+				return console.log(
+					`No config or role found for the plan ${planId} / role (${roleId}) (User: ${userId})`,
+				);
+
 			const guild = client.guilds.cache.get(GUILD_ID);
 			const member = await guild.members.fetch(userId).catch(() => null);
 
@@ -76,7 +85,6 @@ async function checkForSubscriptions() {
 
 			if (response?.raw?.statusCode === 400) {
 				if (!member.roles.cache.has(roleId)) continue;
-				if(roleId === config["prod_QXSle6GS1ZMncZ"]?.roleId) await member.roles.remove(config["prod_QXSle6GS1ZMncZ"]?.roleId2)
 				await member.roles.remove(roleId);
 				await sendNotifyEmbed({ guild, member, roleId });
 				await sendUserEmbed(member, "cancel");
@@ -90,7 +98,6 @@ async function checkForSubscriptions() {
 
 			if (subscrptionData.length === 0 || !isActive) {
 				if (!member.roles.cache.has(roleId)) continue;
-				if(roleId === config["prod_QXSle6GS1ZMncZ"]?.roleId) await member.roles.remove(config["prod_QXSle6GS1ZMncZ"]?.roleId2)
 
 				await member.roles.remove(roleId);
 

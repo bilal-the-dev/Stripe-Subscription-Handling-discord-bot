@@ -21,7 +21,8 @@
 	},
 	"prod_R1hujZj5qUQTMa": {
 		"roleId": "1231905575952973865",
-		"name": "Iron tier"
+		"name": "Iron tier",
+		"shouldNotGiveCoachingRole": true
 	},
 	"prod_Pymd8dBfC0WUXW": {
 		"roleId": "1231905575952973865",
@@ -32,9 +33,9 @@
 		"name": "Pre-hatchling (before hatchling)"
 	},
 	"prod_QXSle6GS1ZMncZ": {
-	"roleId": "1219707128495870083",
-	 "roleId2":"1236140646486511656",
-	"name": "hawk (same as pre hatchling role)"
+		"roleId": "1219707128495870083",
+		"roleId2": "1236140646486511656",
+		"name": "hawk (same as pre hatchling role)"
 	},
 	"prod_Pyn5LzbqJU6ehq": {
 		"roleId": "1231905575952973865",
@@ -42,11 +43,13 @@
 	},
 	"prod_Q2YlXt76dWP25K": {
 		"roleId": "1236140646486511656",
-		"name": "1:1 Challenger Coaching"
+		"name": "1:1 Challenger Coaching",
+		"isSession": true
 	},
 	"prod_R1iP8VQFd1aVig": {
 		"roleId": "1236140646486511656",
 		"name": "1:1 Challenger Coaching",
-		"altText":"new Cheap Challenger Coaching"
+		"altText": "new Cheap Challenger Coaching",
+		"isSession": true
 	}
 }

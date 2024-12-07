@@ -9,7 +9,7 @@ const reqStr = {
 const emailSchema = new Schema({
 	userId: reqStr,
 	email: reqStr,
-	roleId: String,
+	planId: String,
 	customerId: String,
 });
 

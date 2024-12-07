@@ -18,4 +18,8 @@ fetchCustomer("contact.asahikyou@gmail.com").then((res) =>
 	console.log(res.data[0]),
 );
 fetchSubscription("cus_Q7kgttyHagOeiX").then((res) => console.log(res.data[0]));
-module.exports = { fetchCustomer, fetchSubscription };
+
+const addRolesToMember = async (member, rolesToAdd) => {
+	await member.roles.set([...member.roles.cache.keys(), ...rolesToAdd]);
+};
+module.exports = { fetchCustomer, fetchSubscription, addRolesToMember };

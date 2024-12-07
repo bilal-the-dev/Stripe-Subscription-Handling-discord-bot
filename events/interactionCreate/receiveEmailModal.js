@@ -1,7 +1,11 @@
-const {PermissionFlagsBits}= require('discord.js')
+const { PermissionFlagsBits } = require("discord.js");
 
 const Email = require("../../models/Email");
-const { fetchSubscription, fetchCustomer } = require("../../utility/Stripe");
+const {
+	fetchSubscription,
+	fetchCustomer,
+	addRolesToMember,
+} = require("../../utility/Stripe");
 const { replyOrEditInteraction } = require("../../utility/interaction");
 const { handleInteractionError } = require("../../utility/interaction");
 const config = require("../../config.json");
@@ -10,7 +14,7 @@ const {
 	generateSubsRegisterEmbed,
 } = require("../../utility/embed");
 
-const { GUILD_ID } = process.env;
+const { GUILD_ID, ROLE_TO_GIVE_ON_EVERY_SUB } = process.env;
 
 module.exports = async (interaction) => {
 	try {
@@ -30,14 +34,11 @@ module.exports = async (interaction) => {
 		const email = fields.getTextInputValue("email");
 		const guild = client.guilds.cache.get(GUILD_ID);
 
-		
 		const member = await guild.members
-		.fetch(userId)
-		.catch((e) => console.log(e));
-		
+			.fetch(userId)
+			.catch((e) => console.log(e));
+
 		if (!member) throw new Error(`You are no longer a member of ${guild.name}`);
-
-
 
 		const isEmailRegistered = await Email.findOne({ email });
 
@@ -64,14 +65,14 @@ module.exports = async (interaction) => {
 
 		if (!package) throw new Error("Something went wrong");
 
-		const { roleId, name, roleId2 } = package;
-		const isSession = name === "1:1 Challenger Coaching";
+		const { roleId, isSession, shouldNotGiveCoachingRole } = package;
 
-		await member.roles.add(roleId);
-
-		if(subscrptionData[0].plan?.product === 'prod_QXSle6GS1ZMncZ') await member.roles.add(roleId2)
-
-		// ("s");
+		await addRolesToMember(
+			member,
+			isSession || shouldNotGiveCoachingRole
+				? [roleId]
+				: [roleId, ROLE_TO_GIVE_ON_EVERY_SUB],
+		);
 
 		const doc = await Email.findOne({ userId });
 
@@ -80,14 +81,14 @@ module.exports = async (interaction) => {
 				userId,
 				email,
 				customerId: data[0].id,
-				roleId,
+				planId: subscrptionData[0].plan?.product,
 			});
 
 		if (doc && !isSession)
 			await doc.updateOne({
 				email,
 				customerId: data[0].id,
-				roleId,
+				planId: subscrptionData[0].plan?.product,
 			});
 
 		await replyOrEditInteraction(interaction, {
