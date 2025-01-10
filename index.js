@@ -66,16 +66,16 @@ async function checkForSubscriptions() {
 	console.log("running every minute");
 
 	for (const doc of docs) {
-		let member, guild, fetchedRoleId;
+		let member, guild, roleId;
 		try {
 			const { customerId, planId, roleId: roleIdForOldDocuments, userId } = doc;
 
 			const configForPlan = config[planId];
-			fetchedRoleId = configForPlan?.roleId ?? doc.roleId;
+			roleId = configForPlan?.roleId ?? doc.roleId;
 
-			if (!fetchedRoleId) {
+			if (!roleId) {
 				console.log(
-					`No config or role found for the plan ${planId} / role (${fetchedRoleId}) (User: ${userId})`,
+					`No config or role found for the plan ${planId} / role (${roleId}) (User: ${userId})`,
 				);
 				continue;
 			}
@@ -121,7 +121,7 @@ async function checkForSubscriptions() {
 				member,
 				error: true,
 				message: error?.message,
-				roleId: fetchedRoleId,
+				roleId,
 			}).catch(console.error);
 			console.log(error);
 		}
