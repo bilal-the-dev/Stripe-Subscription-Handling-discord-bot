@@ -35,7 +35,7 @@ client.on("ready", (readyClient) => {
 		.catch((e) => console.log("Error connecting to database" + e));
 
 	cron.schedule("*/30 * * * *", checkForSubscriptions);
-	checkForSubscriptions()
+	checkForSubscriptions();
 	const { DefaultCommands } = WOK;
 	new WOK({
 		client,
@@ -66,26 +66,28 @@ async function checkForSubscriptions() {
 	console.log("running every minute");
 
 	for (const doc of docs) {
-		let member, guild, fetchedRoleId
+		let member, guild, fetchedRoleId;
 		try {
 			const { customerId, planId, roleId: roleIdForOldDocuments, userId } = doc;
 
-			console.log(doc)
-			console.log(doc.roleId)
+			console.log(doc);
+			console.log(doc.roleId);
+			console.log(doc.customerId);
 
 			const configForPlan = config[planId];
-			 fetchedRoleId = configForPlan?.roleId ?? doc.roleId;
+			fetchedRoleId = configForPlan?.roleId ?? doc.roleId;
 
-			if (!fetchedRoleId){
-				
-				 console.log(
+			console.log(fetchedRoleId);
+
+			if (!fetchedRoleId) {
+				console.log(
 					`No config or role found for the plan ${planId} / role (${fetchedRoleId}) (User: ${userId})`,
 				);
-				continue
+				continue;
 			}
 
-			 guild = client.guilds.cache.get(GUILD_ID);
-			 member = await guild.members.fetch(userId).catch(() => null);
+			guild = client.guilds.cache.get(GUILD_ID);
+			member = await guild.members.fetch(userId).catch(() => null);
 
 			if (!member) continue;
 
@@ -120,7 +122,13 @@ async function checkForSubscriptions() {
 				await sendUserEmbed(member, "reactivate", subscrptionData[0]?.status);
 			}
 		} catch (error) {
-			await sendNotifyEmbed({ guild, member, error:true, message:error?.message , roleId:fetchedRoleId }).catch(console.error)
+			await sendNotifyEmbed({
+				guild,
+				member,
+				error: true,
+				message: error?.message,
+				roleId: fetchedRoleId,
+			}).catch(console.error);
 			console.log(error);
 		}
 	}
