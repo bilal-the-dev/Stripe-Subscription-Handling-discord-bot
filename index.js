@@ -76,10 +76,10 @@ async function checkForSubscriptions() {
 			const configForPlan = config[planId];
 			 fetchedRoleId = configForPlan?.roleId ?? roleIdForOldDocuments;
 
-			if (!roleId){
+			if (!fetchedRoleId){
 				
 				 console.log(
-					`No config or role found for the plan ${planId} / role (${roleId}) (User: ${userId})`,
+					`No config or role found for the plan ${planId} / role (${fetchedRoleId}) (User: ${userId})`,
 				);
 				continue
 			}
