@@ -73,10 +73,13 @@ async function checkForSubscriptions() {
 			const configForPlan = config[planId];
 			 roleId = configForPlan?.roleId ?? roleIdForOldDocuments;
 
-			if (!roleId)
-				return console.log(
+			if (!roleId){
+				
+				 console.log(
 					`No config or role found for the plan ${planId} / role (${roleId}) (User: ${userId})`,
 				);
+				continue
+			}
 
 			 guild = client.guilds.cache.get(GUILD_ID);
 			 member = await guild.members.fetch(userId).catch(() => null);
