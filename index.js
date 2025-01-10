@@ -66,12 +66,15 @@ async function checkForSubscriptions() {
 	console.log("running every minute");
 
 	for (const doc of docs) {
-		let member, guild, roleId
+		let member, guild, fetchedRoleId
 		try {
 			const { customerId, planId, roleId: roleIdForOldDocuments, userId } = doc;
 
+			console.log(doc)
+			console.log(roleIdForOldDocuments)
+
 			const configForPlan = config[planId];
-			 roleId = configForPlan?.roleId ?? roleIdForOldDocuments;
+			 fetchedRoleId = configForPlan?.roleId ?? roleIdForOldDocuments;
 
 			if (!roleId){
 				
@@ -117,7 +120,7 @@ async function checkForSubscriptions() {
 				await sendUserEmbed(member, "reactivate", subscrptionData[0]?.status);
 			}
 		} catch (error) {
-			await sendNotifyEmbed({ guild, member, error:true, message:error?.message , roleId }).catch(console.error)
+			await sendNotifyEmbed({ guild, member, error:true, message:error?.message , roleId:fetchedRoleId }).catch(console.error)
 			console.log(error);
 		}
 	}
