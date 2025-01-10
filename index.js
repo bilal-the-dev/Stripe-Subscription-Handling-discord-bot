@@ -70,14 +70,8 @@ async function checkForSubscriptions() {
 		try {
 			const { customerId, planId, roleId: roleIdForOldDocuments, userId } = doc;
 
-			console.log(doc);
-			console.log(doc.roleId);
-			console.log(doc.customerId);
-
 			const configForPlan = config[planId];
 			fetchedRoleId = configForPlan?.roleId ?? doc.roleId;
-
-			console.log(fetchedRoleId);
 
 			if (!fetchedRoleId) {
 				console.log(

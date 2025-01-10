@@ -11,6 +11,7 @@ const emailSchema = new Schema({
 	email: reqStr,
 	planId: String,
 	customerId: String,
+	roleId: String,
 });
 
 module.exports = model("Email", emailSchema);
