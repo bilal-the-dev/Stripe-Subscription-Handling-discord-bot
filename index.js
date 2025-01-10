@@ -35,6 +35,7 @@ client.on("ready", (readyClient) => {
 		.catch((e) => console.log("Error connecting to database" + e));
 
 	cron.schedule("*/10 * * * *", checkForSubscriptions);
+	checkForSubscriptions()
 	const { DefaultCommands } = WOK;
 	new WOK({
 		client,
