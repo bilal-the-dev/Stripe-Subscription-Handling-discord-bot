@@ -60,6 +60,8 @@ const sendNotifyEmbed = async function ({
 	member,
 	roleId,
 	guild,
+	error, 
+	message
 }) {
 	const fields = [
 		{ name: "User", value: `${member}` },
@@ -71,6 +73,12 @@ const sendNotifyEmbed = async function ({
 		thumbnail: member.displayAvatarURL(),
 		fields,
 	};
+
+
+	if(error){
+		options.title = 'Error occured!'
+		options.description = message
+	}
 	const embed = generateGeneralEmbed(options);
 
 	const logsChannel = await guild.channels.fetch(process.env.LOGS_CHANNEL_ID);
