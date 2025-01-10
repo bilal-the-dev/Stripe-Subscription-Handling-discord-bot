@@ -65,19 +65,20 @@ async function checkForSubscriptions() {
 	console.log("running every minute");
 
 	for (const doc of docs) {
+		let member, guild, roleId
 		try {
 			const { customerId, planId, roleId: roleIdForOldDocuments, userId } = doc;
 
 			const configForPlan = config[planId];
-			const roleId = configForPlan?.roleId ?? roleIdForOldDocuments;
+			 roleId = configForPlan?.roleId ?? roleIdForOldDocuments;
 
 			if (!roleId)
 				return console.log(
 					`No config or role found for the plan ${planId} / role (${roleId}) (User: ${userId})`,
 				);
 
-			const guild = client.guilds.cache.get(GUILD_ID);
-			const member = await guild.members.fetch(userId).catch(() => null);
+			 guild = client.guilds.cache.get(GUILD_ID);
+			 member = await guild.members.fetch(userId).catch(() => null);
 
 			if (!member) continue;
 
@@ -112,6 +113,7 @@ async function checkForSubscriptions() {
 				await sendUserEmbed(member, "reactivate", subscrptionData[0]?.status);
 			}
 		} catch (error) {
+			await sendNotifyEmbed({ guild, member, error:true, message:error?.message , roleId }).catch(console.error)
 			console.log(error);
 		}
 	}
